@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- ================================= -->
+    <string-array name="fih_calendar_Gan_txt">
+        <item>"庚"</item>
+        <item>"辛"</item>
+        <item>"壬"</item>
+        <item>"暌"</item>
+        <item>"甲"</item>
+        <item>"乙"</item>
+        <item>"丙"</item>
+        <item>"丁"</item>
+        <item>"戊"</item>
+        <item>"已"</item>
+    </string-array>
+
+    <string-array name="fih_calendar_Zhi_txt">
+        <item>"申"</item>
+        <item>"酉"</item>
+        <item>"戌"</item>
+        <item>"亥"</item>
+        <item>"子"</item>
+        <item>"丑"</item>
+        <item>"寅"</item>
+        <item>"卯"</item>
+        <item>"辰"</item>
+        <item>"巳"</item>
+        <item>"午"</item>
+        <item>"未"</item>
+    </string-array>
+
+    <string-array name="fih_calendar_Animals_txt">
+        <item>"鼠"</item>
+        <item>"牛"</item>
+        <item>"虎"</item>
+        <item>"兔"</item>
+        <item>"龙"</item>
+        <item>"蛇"</item>
+        <item>"马"</item>
+        <item>"羊"</item>
+        <item>"猴"</item>
+        <item>"鸡"</item>
+        <item>"狗"</item>
+        <item>"猪"</item>
+    </string-array>
+
+    <string-array name="fih_calendar_SolarTerm_txt">
+        <item>"小寒"</item>
+        <item>"大寒"</item>
+        <item>"立春"</item>
+        <item>"雨水"</item>
+        <item>"惊蛰"</item>
+        <item>"春分"</item>
+        <item>"清明"</item>
+        <item>"谷雨"</item>
+        <item>"立夏"</item>
+        <item>"小满"</item>
+        <item>"芒种"</item>
+        <item>"夏至"</item>
+        <item>"小暑"</item>
+        <item>"大暑"</item>
+        <item>"立秋"</item>
+        <item>"处暑"</item>
+        <item>"白露"</item>
+        <item>"秋分"</item>
+        <item>"寒露"</item>
+        <item>"霜降"</item>
+        <item>"立冬"</item>
+        <item>"小雪"</item>
+        <item>"大雪"</item>
+        <item>"冬至"</item>
+    </string-array>
+
+    <string-array name="fih_calendar_chineseMonthNumber_txt">
+        <item>"正月"</item>
+        <item>"二月"</item>
+        <item>"三月"</item>
+        <item>"四月"</item>
+        <item>"五月"</item>
+        <item>"六月"</item>
+        <item>"七月"</item>
+        <item>"八月"</item>
+        <item>"九月"</item>
+        <item>"十月"</item>
+        <item>"冬月"</item>
+        <item>"腊月"</item>
+    </string-array>
+
+    <string-array name="fih_calendar_sFtv_txt">
+        <item>"0101 元旦"</item>
+        <item>"0214 情人节"</item>
+        <item>"0308 妇女节"</item>
+        <item>"0312 植树节"</item>
+        <item>"0315 消费者权益日"</item>
+        <item>"0323 世界气象日"</item>
+        <item>"0401 愚人节"</item>
+        <item>"0407 世界卫生日"</item>
+        <item>"0501 劳动节"</item>
+        <item>"0504 青年节"</item>
+        <item>"0508 红十字日"</item>
+        <item>"0512 护士节"</item>
+        <item>"0515 国际家庭日"</item>
+        <item>"0517 世界爱眼日"</item>
+        <item>"0601 儿童节"</item>
+        <item>"0623 奥林匹克日"</item>
+        <item>"0625 全国土地日"</item>
+        <item>"0626 反毒品日"</item>
+        <item>"0701 建党日"</item>
+        <item>"0707 抗战纪念日"</item>
+        <item>"0711 世界人口日"</item>
+        <item>"0801 建军节"</item>
+        <item>"0908 国际扫盲日"</item>
+        <item>"0909 毛泽东逝世纪念日"</item>
+        <item>"0910 教师节"</item>
+        <item>"0917 国际和平日"</item>
+        <item>"0920 国际爱牙日"</item>
+        <item>"0922 国际聋人日"</item>
+        <item>"0927 世界旅游日"</item>
+        <item>"0928 孔子诞辰"</item>
+        <item>"1001 中国国庆节"</item>
+        <item>"1004 世界动物日"</item>
+        <item>"1006 老人节"</item>
+        <item>"1007 国际住房日"</item>
+        <item>"1009 世界邮政日"</item>
+        <item>"1015 国际盲人日"</item>
+        <item>"1016 世界粮食日"</item>
+        <item>"1024 联合国日"</item>
+        <item>"1108 中国记者日"</item>
+        <item>"1109 消防宣传日"</item>
+        <item>"1112 孙中山诞辰"</item>
+        <item>"1114 世界糖尿病日"</item>
+        <item>"1117 国际大学生节"</item>
+        <item>"1201 世界艾滋病日"</item>
+        <item>"1203 世界残疾人日"</item>
+        <item>"1209 世界足球日"</item>
+        <item>"1220 澳门回归"</item>
+        <item>"1225 圣诞节"</item>
+        <item>"1226 毛泽东诞辰"</item>
+    </string-array>
+
+    <string-array name="fih_calendar_twsFtv_txt">
+        <item>"0101 开国纪念日"</item>
+        <item>"0228 二二八和平纪念日"</item>
+        <item>"0328 国际妇女节"</item>
+        <item>"0312 国父逝世纪念日"</item>
+        <item>"0329 革命先烈纪念日"</item>
+        <item>"0404 儿童节"</item>
+        <item>"0501 国际劳动节"</item>
+        <item>"0903 军人节"</item>
+        <item>"0928 教师节"</item>
+        <item>"1010 台湾国庆日"</item>
+        <item>"1025 台湾光复日"</item>
+        <item>"1031 蒋公诞辰纪念日"</item>
+        <item>"1112 国父诞辰纪念日"</item>
+        <item>"1225 行宪纪念日"</item>
+    </string-array>
+
+    <string-array name="fih_calendar_lFtv_txt">
+        <item>"0101 春节"</item>
+        <item>"0105 路神生日"</item>
+        <item>"0115 元宵节"</item>
+        <item>"0202 春龙节"</item>
+        <item>"0505 端午节"</item>
+        <item>"0707 七夕"</item>
+        <item>"0715 中元节"</item>
+        <item>"0715 鬼节"</item>
+        <item>"0730 地藏节"</item>
+        <item>"0815 中秋节"</item>
+        <item>"0909 重阳节"</item>
+        <item>"1001 祭祖节"</item>
+        <item>"1220 阔时节"</item>
+        <item>"1208 腊八节"</item>
+        <item>"1223 小年"</item>
+        <item>"1230 除夕"</item>
+    </string-array>
+
+    <string-array name="fih_calendar_twlFtv_txt">
+        <item>"0101 春节"</item>
+        <item>"0104 迎神节"</item>
+        <item>"0105 定光古佛祭日"</item>
+        <item>"0115 元宵节"</item>
+        <item>"0323 妈祖节"</item>
+        <item>"0505 端午节"</item>
+        <item>"0601 半年补节"</item>
+        <item>"0615 半年祭"</item>
+        <item>"0707 七夕"</item>
+        <item>"0715 元节"</item>
+        <item>"0815 中秋节"</item>
+        <item>"0909 重阳节"</item>
+        <item>"1015 下元节"</item>
+        <item>"1120 韩文公祭日"</item>
+        <item>"1216 尾牙节"</item>
+        <item>"1224 送神节"</item>
+        <item>"1230 除夕"</item>
+    </string-array>
+
+    <string-array name="fih_calendar_wFtv_txt">
+        <item>"0521 母亲节"</item>
+        <item>"0631 父亲节"</item>
+    </string-array>
+
+    <string-array name="fih_calendar_chineseTen_txt">
+        <item>"初一"</item>
+        <item>"初二"</item>
+        <item>"初三"</item>
+        <item>"初四"</item>
+        <item>"初五"</item>
+        <item>"初六"</item>
+        <item>"初七"</item>
+        <item>"初八"</item>
+        <item>"初九"</item>
+        <item>"初十"</item>
+        <item>"十一"</item>
+        <item>"十二"</item>
+        <item>"十三"</item>
+        <item>"十四"</item>
+        <item>"十五"</item>
+        <item>"十六"</item>
+        <item>"十七"</item>
+        <item>"十八"</item>
+        <item>"十九"</item>
+        <item>"二十"</item>
+        <item>"廿一"</item>
+        <item>"廿二"</item>
+        <item>"廿三"</item>
+        <item>"廿四"</item>
+        <item>"廿五"</item>
+        <item>"廿六"</item>
+        <item>"廿七"</item>
+        <item>"廿八"</item>
+        <item>"廿九"</item>
+        <item>"三十"</item>
+    </string-array>
+
+    <string-array name="fih_calendar_usFtv_txt">
+        <item>"0101 新年"</item>
+        <item>"0212 林肯纪念日"</item>
+        <item>"0214 情人节"</item>
+        <item>"0401 愚人节"</item>
+        <item>"0501 劳动节"</item>
+        <item>"0704 独立日"</item>
+        <item>"0913 祖父母节"</item>
+        <item>"1031 万圣节"</item>
+        <item>"1225 圣诞节"</item>
+    </string-array>
+
+    <string-array name="fih_calendar_uswFtv_txt">
+        <item>"0132 马丁.路德.金纪念日"</item>
+        <item>"0232 华盛顿纪念日"</item>
+        <item>"0521 母亲节"</item>
+        <item>"0631 父亲节"</item>
+    </string-array>
+
+    <string-array name="fih_calendar_usextra_txt">
+        <item>"耶稣受难日"</item>
+        <item>"复活节"</item>
+        <item>"感恩节"</item>
+    </string-array>
+
+    <string-array name="solar_festival_txt_for_IW">
+        <item>"0101 元旦"</item>
+        <item>"0214 情人节"</item>
+        <item>"0308 妇女节"</item>
+        <item>"0312 植树节"</item>
+        <item>"0401 愚人节"</item>
+        <item>"0501 劳动节"</item>
+        <item>"0504 青年节"</item>
+        <item>"0601 儿童节"</item>
+        <item>"0801 建军节"</item>
+        <item>"0910 教师节"</item>
+        <item>"1001 国庆节"</item>
+        <item>"1006 老人节"</item>
+        <item>"1225 圣诞节"</item>
+    </string-array>
+
+    <string-array name="lunar_festival_txt_for_IW">
+        <item>"0101 春节"</item>
+        <item>"0115 元宵节"</item>
+        <item>"0505 端午节"</item>
+        <item>"0707 七夕"</item>
+        <item>"0715 鬼节"</item>
+        <item>"0815 中秋节"</item>
+        <item>"0909 重阳节"</item>
+        <item>"1220 阔时节"</item>
+        <item>"1208 腊八节"</item>
+        <item>"1223 小年"</item>
+        <item>"1230 除夕"</item>
+    </string-array>
+    
+    <string name="fih_calendar_qingming_txt">"QingMing"</string>
+    
+</resources>
