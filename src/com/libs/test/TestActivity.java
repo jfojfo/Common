@@ -55,6 +55,8 @@ public class TestActivity extends Activity {
             LogUtil.e(TAG, "fromAscii:" + StringConverter.fromAscii(ascii));
             
             Notify.notify(this, "message");
+            
+            LogUtil.e(TAG, "isScreenLocked:" + Utils.isScreenLocked(this));
         } catch (IOException e) {
             e.printStackTrace();
         }

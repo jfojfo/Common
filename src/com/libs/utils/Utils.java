@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.KeyguardManager;
 import android.app.ProgressDialog;
 import android.content.ContentProviderOperation;
 import android.content.ContentResolver;
@@ -208,10 +209,9 @@ public class Utils {
         return progressDialog;
     }
 
-     static void dismissProgressDialog(ProgressDialog progressDialog) {
-        if (progressDialog != null && progressDialog.isShowing()) {
-            progressDialog.dismiss();
-//            progressDialog = null;
+    public static void dismissDialog(Dialog dialog) {
+        if (isDialogActive(dialog)) {
+            dialog.dismiss();
         }
     }
     
@@ -405,7 +405,10 @@ public class Utils {
         manager.setWifiEnabled(b);
     }
 
-
+    public static boolean isScreenLocked(Context context) {
+        KeyguardManager keyguardManager = (KeyguardManager) context.getSystemService(Context.KEYGUARD_SERVICE);
+        return keyguardManager.inKeyguardRestrictedInputMode();
+    }
     
     public static void _insertContact(ContentResolver resolver, String name,
             String phoneNumber, int typePhone,

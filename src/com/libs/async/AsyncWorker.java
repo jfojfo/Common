@@ -13,9 +13,6 @@ public class AsyncWorker extends Thread {
 
     public AsyncWorker(RequestDispatcher dispatcher, int id, String name) {
         super(name + "#" + id);
-        // don't use Thread.setPriority(...)!!!
-        // setPriority(Process.THREAD_PRIORITY_BACKGROUND); 
-        Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND);
         mThreadId = id;
         mDispatcher = dispatcher;
     }
@@ -25,6 +22,10 @@ public class AsyncWorker extends Thread {
     }
     
     public void run() {
+        // don't use Thread.setPriority(...)!!!
+        // setPriority(Process.THREAD_PRIORITY_BACKGROUND); 
+        // set in run() !!! do *not* set in Constructors!
+        Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND);
         while (mRunning) {
             Request request = null;
             try {
