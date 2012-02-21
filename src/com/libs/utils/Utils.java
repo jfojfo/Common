@@ -2,8 +2,11 @@ package com.libs.utils;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 
 import android.app.Activity;
+import android.app.ActivityManager;
+import android.app.ActivityManager.RunningAppProcessInfo;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.KeyguardManager;
@@ -408,6 +411,23 @@ public class Utils {
     public static boolean isScreenLocked(Context context) {
         KeyguardManager keyguardManager = (KeyguardManager) context.getSystemService(Context.KEYGUARD_SERVICE);
         return keyguardManager.inKeyguardRestrictedInputMode();
+    }
+    
+    public static String getCurrProcessName(Context context) {
+        ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        String name = "";
+        List<RunningAppProcessInfo> list = activityManager.getRunningAppProcesses();
+        if (list != null) {
+            int pid = android.os.Process.myPid();
+            for (RunningAppProcessInfo info : list) {
+                if (pid == info.pid) {
+                    name = info.processName;
+                    LogUtil.d(TAG, "current process name:" + name);
+                    break;
+                }
+            }
+        }
+        return name;
     }
     
     public static void _insertContact(ContentResolver resolver, String name,
