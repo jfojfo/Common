@@ -1,6 +1,8 @@
 package com.libs.utils;
 
 import java.io.File;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -430,6 +432,16 @@ public class Utils {
         return name;
     }
     
+    public static String getStackTraceString(Throwable tr) {
+        if (tr == null) {
+            return "";
+        }
+        StringWriter sw = new StringWriter();
+        PrintWriter pw = new PrintWriter(sw);
+        tr.printStackTrace(pw);
+        return sw.toString();
+    }
+
     public static void _insertContact(ContentResolver resolver, String name,
             String phoneNumber, int typePhone,
             String email, int typeEmail) {
