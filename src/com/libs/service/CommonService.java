@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.IBinder;
 import android.os.Process;
-import android.util.Log;
 
 import com.libs.statistics.Stat;
 import com.libs.utils.LogUtil;
@@ -56,7 +55,7 @@ public class CommonService extends Service {
         LogUtil.d(TAG, "Received start id " + startId + ": " + intent);
         if (intent != null) {
             String action = intent.getAction();
-            Log.d(TAG, "onStartCommand:" + action);
+            LogUtil.d(TAG, "onStartCommand:" + action);
             if (ACTION_UPDATE_STATISTICS.equals(action)) {
                 handleUpdateStatistics();
             } else if (ACTION_STOP_SERVICE.equals(action)) {

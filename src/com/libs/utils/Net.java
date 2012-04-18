@@ -15,6 +15,7 @@ import org.apache.http.HttpStatus;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.conn.params.ConnRouteParams;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -30,8 +31,15 @@ import android.text.TextUtils;
 
 public class Net {
     private static final String TAG = Net.class.getSimpleName();
+    
     public static final int EXCEPTION_FORWARD = 0;
-    public static final int EXCEPTION_HTTP_POST = 1;
+    public static final int EXCEPTION_HTTP_POST = 10;
+    public static final int EXCEPTION_HTTP_GET = 20;
+    public static final int EXCEPTION_HTTP_STATUS = 30;
+    public static final int EXCEPTION_NETWORK_UNAVAILABLE = 40;
+    public static final int EXCEPTION_USER = 10000;
+    
+    private static final int BUFFER_DEFAULT_SIZE = 0x2000; //8K
 
     public static class NetType {
         public static final int NET_TYPE_UNAVAILABLE = 0;
@@ -303,7 +311,13 @@ public class Net {
             List<NameValuePair> params, Progress progress) throws MyException {
         ByteArrayOutputStream byteos = new ByteArrayOutputStream();
         post(context, url, params, byteos, progress);
-        return byteos.toByteArray();
+        byte[] ret = byteos.toByteArray();
+        try {
+            byteos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return ret;
     }
     
     public static void post(Context context, String url,
@@ -315,7 +329,7 @@ public class Net {
             NetType netType = getNetworkType(context);
             LogUtil.d(TAG, netType.toString());
             if (netType.getType() == NetType.NET_TYPE_UNAVAILABLE)
-                throw new MyException(EXCEPTION_HTTP_POST, "Network is not available.");
+                throw new MyException(EXCEPTION_NETWORK_UNAVAILABLE, "Network is not available.");
 
             HttpClient httpclient = new DefaultHttpClient();
             HttpParams httpParameters = httpclient.getParams();
@@ -359,7 +373,7 @@ public class Net {
                 if (zipHeader != null && zipHeader.getValue().indexOf("gzip") >= 0)
                     is = new GZIPInputStream(is);
 
-                final int SIZE = 0x2000;
+                final int SIZE = BUFFER_DEFAULT_SIZE;
                 byte[] buffer = new byte[SIZE];
                 int count = 0;
                 while ((count = is.read(buffer)) > 0) {
@@ -368,17 +382,104 @@ public class Net {
                         progress.publishProgress((double)count);
                     }
                 }
+            } else {
+                throw new MyException(EXCEPTION_HTTP_STATUS, "post statusCode:" +
+                        response.getStatusLine().getStatusCode());
             }
             httpclient.getConnectionManager().shutdown();
         } catch (Exception e) {
             throw new MyException(EXCEPTION_HTTP_POST, e);
         } finally {
-            if (out != null)
-                try { out.close(); } catch (IOException e) { e.printStackTrace(); }
+//            if (out != null)
+//                try { out.close(); } catch (IOException e) { e.printStackTrace(); }
             if (progressStarted)
                 progress.publishFinished();
         }
     }
 
+    public static byte[] get(Context context, String url, Progress progress) throws MyException {
+        ByteArrayOutputStream byteos = new ByteArrayOutputStream();
+        get(context, url, byteos, progress);
+        byte[] ret = byteos.toByteArray();
+        try {
+            byteos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return ret;
+    }
+
+    public static void get(Context context, String url, 
+            OutputStream out, Progress progress) throws MyException {
+        if (out == null) return;
+        boolean progressStarted = false;
+        try {
+            NetType netType = getNetworkType(context);
+            LogUtil.d(TAG, netType.toString());
+            if (netType.getType() == NetType.NET_TYPE_UNAVAILABLE)
+                throw new MyException(EXCEPTION_NETWORK_UNAVAILABLE, "Network is not available.");
+
+            HttpClient httpclient = new DefaultHttpClient();
+            HttpParams httpParameters = httpclient.getParams();
+            HttpConnectionParams.setConnectionTimeout(httpParameters, 30000);
+            HttpConnectionParams.setSoTimeout(httpParameters, 30000);
+            if (netType.getType() == NetType.NET_TYPE_MOBILE_WAP) {
+                HttpHost proxy = new HttpHost(netType.getProxy(), netType.getPort());
+                httpParameters.setParameter(ConnRouteParams.DEFAULT_PROXY, proxy);
+            }
+            
+            HttpGet httpget = new HttpGet(url);
+            httpget.addHeader("Accept-Encoding", "gzip");
+            httpget.addHeader("User-Agent", Utils.getDeviceInfoForUserAgent(context));
+
+            HttpResponse response = httpclient.execute(httpget);
+            if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
+                int total = 0;
+                if (progress != null) {
+                    Header[] headers = response.getHeaders("Content-Length");
+                    if (headers == null || headers.length == 0) {
+                        //throw new MyException(EXCEPTION_HTTP_GET, "Response need 'Content-Length'.");
+                    }
+                    else {
+                        total = Integer.parseInt(headers[0].getValue());
+                    }
+                }
+
+                if (total > 0 && progress != null) {
+                    progressStarted = true;
+                    progress.setMax(total);
+                    progress.publishStart();
+                    progress.nextPhase();
+                }
+
+                HttpEntity entity = response.getEntity();
+                InputStream is = entity.getContent();
+                Header zipHeader = entity.getContentEncoding();
+                if (zipHeader != null && zipHeader.getValue().indexOf("gzip") >= 0)
+                    is = new GZIPInputStream(is);
+
+                final int SIZE = BUFFER_DEFAULT_SIZE;
+                byte[] buffer = new byte[SIZE];
+                int count = 0;
+                while ((count = is.read(buffer)) > 0) {
+                    out.write(buffer, 0, count);
+                    if (progressStarted) {
+                        progress.publishProgress((double)count);
+                    }
+                }
+            } else {
+                throw new MyException(EXCEPTION_HTTP_STATUS, "get statusCode:" +
+                        response.getStatusLine().getStatusCode());
+            }
+            httpclient.getConnectionManager().shutdown();
+        } catch (Exception e) {
+            throw new MyException(EXCEPTION_HTTP_GET, e);
+        } finally {
+//            if (out != null)
+//                try { out.close(); } catch (IOException e) { e.printStackTrace(); }
+            if (progressStarted)
+                progress.publishFinished();
+        }
+    }
 
 }
