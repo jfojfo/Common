@@ -17,6 +17,14 @@ public class LogUtil {
     public static boolean EDBG = true;
     public static boolean LOG2FILE = false;
     
+    public static void setDebugEnabled(boolean b) {
+        VDBG = b;
+        DDBG = b;
+        IDBG = b;
+        WDBG = b;
+        EDBG = b;
+    }
+    
     public static void v(String tag, String msg) {
         if (VDBG) {
             Log.v(tag, msg);
