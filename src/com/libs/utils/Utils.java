@@ -42,6 +42,13 @@ import android.widget.Toast;
 public class Utils {
     private static final String TAG = Utils.class.getSimpleName();
 
+    public static void removePref(Context context, String name) {
+        SharedPreferences.Editor editPrefs = PreferenceManager
+                .getDefaultSharedPreferences(context).edit();
+        editPrefs.remove(name);
+        editPrefs.commit();
+    }
+
     public static String getStringPref(Context context, String name, String def) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         return prefs.getString(name, def);
