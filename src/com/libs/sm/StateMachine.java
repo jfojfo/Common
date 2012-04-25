@@ -4,7 +4,8 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import android.util.Log;
+import com.libs.utils.LogUtil;
+
 
 public class StateMachine {
     private static final String TAG = StateMachine.class.getName();
@@ -29,10 +30,10 @@ public class StateMachine {
 
     public SMState registerTransition(SMState current, SMEvent e) {
         if (null == current || null == e) {
-            Log.e(TAG, "registerTransition(): null parameter");
+            LogUtil.e(TAG, "registerTransition(): null parameter");
             return null;
         }
-        Log.d(TAG, "register transition:" + current.getDescription() + "->" + e.getDescription() + "->...");
+        LogUtil.d(TAG, "register transition:" + current.getDescription() + "->" + e.getDescription() + "->...");
         SMState nextState = SMState.newState();
         current.addTransition(e, nextState);
         return nextState;
@@ -40,30 +41,30 @@ public class StateMachine {
 
     public void registerTransition(SMState current, SMEvent e, SMState next) {
         if (null == current || null == e || null == next) {
-            Log.e(TAG, "registerTransition(): null parameter");
+            LogUtil.e(TAG, "registerTransition(): null parameter");
             return;
         }
-        Log.d(TAG, "register transition:" + current.getDescription() + "->" + e.getDescription()
+        LogUtil.d(TAG, "register transition:" + current.getDescription() + "->" + e.getDescription()
                 + "->" + next.getDescription());
         current.addTransition(e, next);
     }
 
     public SMState fireEvent(SMEvent e) {
         if (null == mCurrentState) {
-            Log.e(TAG, "StateMachine not initialized yet!");
+            LogUtil.e(TAG, "StateMachine not initialized yet!");
             return null;
         }
         if (null == e) {
-            Log.e(TAG, "fireEvent(): null parameter");
+            LogUtil.e(TAG, "fireEvent(): null parameter");
             return null;
         }
         
-        Log.d(TAG, "fireEvent:" + e.getDescription() + "|state:" + mCurrentState.getDescription());
+        LogUtil.d(TAG, "fireEvent:" + e.getDescription() + "|state:" + mCurrentState.getDescription());
         
         SMState nextState = null;
         if ((e.getFlag() & FLAG_NEXT_STATE_SPECIFIED) != 0) {
             nextState = (SMState)e.getArgs();
-            Log.d(TAG, "transite:" + mCurrentState.getDescription() + 
+            LogUtil.d(TAG, "transite:" + mCurrentState.getDescription() + 
                     "->" + e.getDescription() + "[ChangeState]" + "->" + nextState.getDescription());
         }
         else {
@@ -92,7 +93,7 @@ public class StateMachine {
     }
     
     public void onEvent(SMEvent e) {
-        Log.e(TAG, "Unknown event:" + e.getDescription() + "|transitionId:0x" + Integer.toHexString((Integer)e.getTransitionId()));
+        LogUtil.e(TAG, "Unknown event:" + e.getDescription() + "|transitionId:0x" + Integer.toHexString((Integer)e.getTransitionId()));
     }
 
     public SMEvent genEvent() {
@@ -131,7 +132,7 @@ public class StateMachine {
 
         private void addTransition(SMEvent e, SMState next) {
             if (mState.get(e) != null) {
-                Log.v(TAG, "Transition already exists:" +
+                LogUtil.v(TAG, "Transition already exists:" +
                         this.getDescription() + "->" +
                         e.getDescription() + "->" +
                         mState.get(e).getDescription() +
@@ -148,12 +149,12 @@ public class StateMachine {
                 next = mState.get(e);
             
             if (null == next) {
-                Log.v(TAG, "Unknown transition:" +
+                LogUtil.v(TAG, "Unknown transition:" +
                         this.getDescription() + "->" + 
                         e.getDescription() + "->???");
                 return null;
             }
-            Log.d(TAG, "transite:" + this.getDescription() + "->" + e.getDescription() + "->" + next.getDescription());
+            LogUtil.d(TAG, "transite:" + this.getDescription() + "->" + e.getDescription() + "->" + next.getDescription());
             return next;
         }
 
