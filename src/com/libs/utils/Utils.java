@@ -85,6 +85,18 @@ public class Utils {
         editPrefs.commit();
     }
 
+    public static long getLongPref(Context context, String name, long def) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        return prefs.getLong(name, def);
+    }
+
+    public static void setLongPref(Context context, String name, long value) {
+        SharedPreferences.Editor editPrefs = PreferenceManager
+                .getDefaultSharedPreferences(context).edit();
+        editPrefs.putLong(name, value);
+        editPrefs.commit();
+    }
+
     // mode: Context.MODE_WORLD_READABLE
     public static String getStringPref(Context context, String name, String def, int mode) {
         SharedPreferences prefs = 
@@ -125,13 +137,26 @@ public class Utils {
         editPrefs.commit();
     }
 
+    public static long getLongPref(Context context, String name, long def, int mode) {
+        SharedPreferences prefs = 
+            context.getSharedPreferences(context.getPackageName() + "_preferences", mode);
+        return prefs.getLong(name, def);
+    }
+
+    public static void setLongPref(Context context, String name, long value, int mode) {
+        SharedPreferences.Editor editPrefs = 
+            context.getSharedPreferences(context.getPackageName() + "_preferences", mode).edit();
+        editPrefs.putLong(name, value);
+        editPrefs.commit();
+    }
+
     
     public static void showMessage(Context context, String msg) {
-        Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
+        Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
     }
 
     public static void showMessage(Context context, int resid) {
-        Toast.makeText(context, resid, Toast.LENGTH_LONG).show();
+        Toast.makeText(context, resid, Toast.LENGTH_SHORT).show();
     }
 
     public static AlertDialog showDialog(Context context, CharSequence title, CharSequence msg,
@@ -470,13 +495,15 @@ public class Utils {
                 .withValue(ContactsContract.CommonDataKinds.Phone.NUMBER, phoneNumber)
                 .withValue(ContactsContract.CommonDataKinds.Phone.TYPE, typePhone)
                 .build());
-        ops.add(ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
-                .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
-                .withValue(ContactsContract.Data.MIMETYPE,
-                        ContactsContract.CommonDataKinds.Email.CONTENT_ITEM_TYPE)
-                .withValue(ContactsContract.CommonDataKinds.Email.DATA, email)
-                .withValue(ContactsContract.CommonDataKinds.Email.TYPE, typeEmail)
-                .build());
+        if (email != null) {
+            ops.add(ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
+                    .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
+                    .withValue(ContactsContract.Data.MIMETYPE,
+                            ContactsContract.CommonDataKinds.Email.CONTENT_ITEM_TYPE)
+                    .withValue(ContactsContract.CommonDataKinds.Email.DATA, email)
+                    .withValue(ContactsContract.CommonDataKinds.Email.TYPE, typeEmail)
+                    .build());
+        }
         try {
             resolver.applyBatch(ContactsContract.AUTHORITY, ops);
         } catch (RemoteException e) {

@@ -65,6 +65,10 @@ public class MergeAdapter extends BaseAdapter implements SectionIndexer {
             showAdapter(index);
     }
     
+    public boolean isHided(ListAdapter adapter){
+        return hidden.contains(adapter);
+    }
+    
     
     /**
      * Adds a new adapter to the roster of things to appear in the aggregate
