@@ -5,3 +5,4 @@ gen/
 bin/
 gen_ant/
 bin_ant/
+.settings
