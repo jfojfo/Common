@@ -21,7 +21,7 @@ public class Defer {
     public static class Promise {
         private Defer mDefer;
 
-        public Promise(Defer defer) {
+        private Promise(Defer defer) {
             mDefer = defer;
         }
 
@@ -34,12 +34,12 @@ public class Defer {
             mDefer.fail(cb);
             return this;
         }
-        
+
         public Promise progress(Func cb) {
             mDefer.progress(cb);
             return this;
         }
-        
+
     }
 
     public Defer() {
@@ -53,7 +53,7 @@ public class Defer {
         return new Promise(this);
     }
 
-    synchronized public void done(Func cb) {
+    synchronized protected void done(Func cb) {
         if (cb != null) {
             if (mState == STATE_DONE) {
                 cb.call(mArgsDone);
@@ -63,7 +63,7 @@ public class Defer {
         }
     }
 
-    synchronized public void fail(Func cb) {
+    synchronized protected void fail(Func cb) {
         if (cb != null) {
             if (mState == STATE_FAIL) {
                 cb.call(mArgsFail);
@@ -73,7 +73,7 @@ public class Defer {
         }
     }
 
-    synchronized public void progress(Func cb) {
+    synchronized protected void progress(Func cb) {
         if (cb != null) {
             mProgressQueue.add(cb);
             if (mState == STATE_PROGRESS) {
@@ -99,7 +99,7 @@ public class Defer {
         mState = STATE_PROGRESS;
         _action(args);
     }
-    
+
     protected void _action(Object... args) {
         List<Func> queue = null;
         if (mState == STATE_DONE) {
