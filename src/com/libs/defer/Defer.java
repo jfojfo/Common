@@ -40,6 +40,25 @@ public class Defer {
             return this;
         }
 
+        public Promise always(Func cb) {
+            mDefer.always(cb);
+            return this;
+        }
+
+        public Promise then(Func cbDone) {
+            mDefer.then(cbDone);
+            return this;
+        }
+
+        public Promise then(Func cbDone, Func cbFail) {
+            mDefer.then(cbDone, cbFail);
+            return this;
+        }
+
+        public Promise then(Func cbDone, Func cbFail, Func cbProgress) {
+            mDefer.then(cbDone, cbFail, cbProgress);
+            return this;
+        }
     }
 
     public Defer() {
@@ -53,31 +72,49 @@ public class Defer {
         return new Promise(this);
     }
 
-    synchronized protected void done(Func cb) {
-        if (cb != null) {
+    protected void done(Func cb) {
+        then(cb, null, null);
+    }
+
+    protected void fail(Func cb) {
+        then(null, cb, null);
+    }
+
+    protected void progress(Func cb) {
+        then(null, null, cb);
+    }
+
+    protected void always(Func cb) {
+        then(cb, cb, null);
+    }
+
+    protected void then(Func cbDone) {
+        then(cbDone, null, null);
+    }
+
+    protected void then(Func cbDone, Func cbFail) {
+        then(cbDone, cbFail, null);
+    }
+
+    synchronized protected void then(Func cbDone, Func cbFail, Func cbProgress) {
+        if (cbDone != null) {
             if (mState == STATE_DONE) {
-                cb.call(mArgsDone);
+                cbDone.call(mArgsDone);
             } else {
-                mDoneQueue.add(cb);
+                mDoneQueue.add(cbDone);
             }
         }
-    }
-
-    synchronized protected void fail(Func cb) {
-        if (cb != null) {
+        if (cbFail != null) {
             if (mState == STATE_FAIL) {
-                cb.call(mArgsFail);
+                cbFail.call(mArgsFail);
             } else {
-                mFailQueue.add(cb);
+                mFailQueue.add(cbFail);
             }
         }
-    }
-
-    synchronized protected void progress(Func cb) {
-        if (cb != null) {
-            mProgressQueue.add(cb);
+        if (cbProgress != null) {
+            mProgressQueue.add(cbProgress);
             if (mState == STATE_PROGRESS) {
-                cb.call(mArgsProgress);
+                cbProgress.call(mArgsProgress);
             }
         }
     }
