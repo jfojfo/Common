@@ -513,5 +513,17 @@ public class Utils {
         }
     }
 
+    public static String byteCountToDisplaySize(long size) {
+        String[] units = {"bytes","KB","MB","GB","TB","PB"};
+        int unit = 0;
+        long remain = 0;
+        while (size > 1024 && unit < units.length - 1) {
+            remain = size % 1024;
+            size /= 1024;
+            unit++;
+        }
+        return String.format(unit == 0 ? "%1$d %3$s" : "%2$.1f %3$s",
+                size, size + remain / 1024.0f, units[unit]);
+    }
 
 }
