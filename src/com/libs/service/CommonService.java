@@ -5,9 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.IBinder;
-import android.os.Process;
 
-import com.libs.statistics.Stat;
 import com.libs.utils.LogUtil;
 
 public class CommonService extends Service {
@@ -83,19 +81,19 @@ public class CommonService extends Service {
     }
 
     private void handleUpdateStatistics() {
-        final Context context = CommonService.this;
-        new Thread() {
-            @Override
-            public void run() {
-                setName("update-statistics-thread");
-                setPriority(Process.THREAD_PRIORITY_BACKGROUND);
-
-                Stat.update(context);
-                Stat.updateOnlineConfig(context);
-                LogUtil.d(TAG, "ads:" + Stat.getConfigParams(context, "ads"));
-                LogUtil.d(TAG, "channel:" + Stat.getMetaDataInManifest(context, "UMENG_CHANNEL"));
-            }
-        }.start();
+//        final Context context = CommonService.this;
+//        new Thread() {
+//            @Override
+//            public void run() {
+//                setName("update-statistics-thread");
+//                setPriority(Process.THREAD_PRIORITY_BACKGROUND);
+//
+//                Stat.update(context);
+//                Stat.updateOnlineConfig(context);
+//                LogUtil.d(TAG, "ads:" + Stat.getConfigParams(context, "ads"));
+//                LogUtil.d(TAG, "channel:" + Stat.getMetaDataInManifest(context, "UMENG_CHANNEL"));
+//            }
+//        }.start();
     }
 
     private void handleDownload(int id, String url, String output) {

@@ -13,36 +13,9 @@
         </activity>
 
         <service android:name="com.libs.service.CommonService" />
-        
-        
-        <!-- UMENG -->
-        <meta-data android:value="..." android:name="UMENG_APPKEY" />
-        <meta-data android:value="CHANNEL_@PUBLIC@" android:name="UMENG_CHANNEL" />
 
-        <!-- waps -->
-        <activity android:name="com.waps.OffersWebView"
-            android:configChanges="keyboardHidden|orientation" />
-        <meta-data android:name="WAPS_ID" android:value="..." />
-        <!--以下属性为分发渠道ID,可以选用-->
-        <meta-data android:name="WAPS_PID" android:value="CHANNEL_@PUBLIC@" />
     </application>
 
-    <uses-sdk android:minSdkVersion="7" android:targetSdkVersion="8"/>
-
-    <!-- umeng -->
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.READ_LOGS" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    
-    <!-- waps -->
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.GET_TASKS" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-sdk android:minSdkVersion="8" android:targetSdkVersion="19"/>
     
 </manifest>
