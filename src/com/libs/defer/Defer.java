@@ -17,6 +17,7 @@ public class Defer {
     private static final int STATE_DONE = 1;
     private static final int STATE_FAIL = 2;
     private static final int STATE_PROGRESS = 3;
+    private Object mTag;
 
     public static class Promise {
         private Defer mDefer;
@@ -153,6 +154,14 @@ public class Defer {
             Func cb = iter.next();
             cb.call(args);
         }
+    }
+
+    public Object getTag() {
+        return mTag;
+    }
+
+    public void setTag(Object tag) {
+        this.mTag = tag;
     }
 
 }
