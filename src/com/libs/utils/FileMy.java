@@ -57,9 +57,10 @@ public class FileMy {
         
         FileOutputStream fos = new FileOutputStream(file);
         FileChannel channel = fos.getChannel();
-        ByteArrayInputStream is = new ByteArrayInputStream(content.getBytes());
+        byte[] bytes = content.getBytes();
+        ByteArrayInputStream is = new ByteArrayInputStream(bytes);
         ReadableByteChannel rchannel = Channels.newChannel(is);
-        channel.transferFrom(rchannel, 0, file.length());
+        channel.transferFrom(rchannel, 0, bytes.length);
         channel.close();
         rchannel.close();
         
