@@ -456,7 +456,7 @@ public class Utils {
             for (RunningAppProcessInfo info : list) {
                 if (pid == info.pid) {
                     name = info.processName;
-                    LogUtil.d(TAG, "current process name:" + name);
+                    LogUtils.d("current process name:" + name);
                     break;
                 }
             }

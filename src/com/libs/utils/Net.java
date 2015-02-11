@@ -1,11 +1,11 @@
 package com.libs.utils;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.List;
-import java.util.zip.GZIPInputStream;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.Handler;
+import android.os.Message;
+import android.text.TextUtils;
 
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
@@ -22,12 +22,12 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
 
-import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.os.Handler;
-import android.os.Message;
-import android.text.TextUtils;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.List;
+import java.util.zip.GZIPInputStream;
 
 public class Net {
     private static final String TAG = Net.class.getSimpleName();
@@ -327,7 +327,7 @@ public class Net {
         boolean progressStarted = false;
         try {
             NetType netType = getNetworkType(context);
-            LogUtil.d(TAG, netType.toString());
+            LogUtils.d(netType.toString());
             if (netType.getType() == NetType.NET_TYPE_UNAVAILABLE)
                 throw new MyException(EXCEPTION_NETWORK_UNAVAILABLE, "Network is not available.");
 
@@ -415,7 +415,7 @@ public class Net {
         boolean progressStarted = false;
         try {
             NetType netType = getNetworkType(context);
-            LogUtil.d(TAG, netType.toString());
+            LogUtils.d(netType.toString());
             if (netType.getType() == NetType.NET_TYPE_UNAVAILABLE)
                 throw new MyException(EXCEPTION_NETWORK_UNAVAILABLE, "Network is not available.");
 

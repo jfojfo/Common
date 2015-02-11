@@ -1,12 +1,12 @@
 package com.libs.defer;
 
-import java.lang.ref.WeakReference;
-import java.util.concurrent.ConcurrentHashMap;
-
 import android.app.Activity;
 
 import com.libs.defer.Defer.Promise;
-import com.libs.utils.LogUtil;
+import com.libs.utils.LogUtils;
+
+import java.lang.ref.WeakReference;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class DeferHelper {
     private static ConcurrentHashMap<Object, MyDefer> mDeferMap = new ConcurrentHashMap<Object, MyDefer>();
@@ -28,8 +28,8 @@ public class DeferHelper {
             Activity activity = mActivityRef.get();
             if (activity != null) {
                 if (activity.isFinishing()) {
-                    if (LogUtil.DDBG) {
-                        LogUtil.d("DeferHelper", "is finishing");
+                    if (LogUtils.allowD) {
+                        LogUtils.d("is finishing");
                     }
                     return;
                 }
@@ -49,8 +49,8 @@ public class DeferHelper {
             Activity activity = mActivityRef.get();
             if (activity != null) {
                 if (activity.isFinishing()) {
-                    if (LogUtil.DDBG) {
-                        LogUtil.d("DeferHelper", "is finishing");
+                    if (LogUtils.allowD) {
+                        LogUtils.d("is finishing");
                     }
                     return;
                 }
@@ -70,8 +70,8 @@ public class DeferHelper {
             Activity activity = mActivityRef.get();
             if (activity != null) {
                 if (activity.isFinishing()) {
-                    if (LogUtil.DDBG) {
-                        LogUtil.d("DeferHelper", "is finishing");
+                    if (LogUtils.allowD) {
+                        LogUtils.d("is finishing");
                     }
                     return;
                 }

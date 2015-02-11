@@ -25,7 +25,7 @@ public class Zip {
         ZipEntry entry;
 
         while ((entry = zis.getNextEntry()) != null) {
-            LogUtil.d(TAG, "Unzip: " + "=" + entry);
+            LogUtils.d("Unzip: " + "=" + entry);
             int count;
             byte data[] = new byte[BUFFER];
             strEntry = entry.getName();

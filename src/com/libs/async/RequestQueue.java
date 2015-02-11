@@ -1,8 +1,8 @@
 package com.libs.async;
 
-import java.util.LinkedList;
+import com.libs.utils.LogUtils;
 
-import com.libs.utils.LogUtil;
+import java.util.LinkedList;
 
 public class RequestQueue {
 
@@ -35,7 +35,7 @@ public class RequestQueue {
      * push this obj on the request queue
      */
     public synchronized void push(Object obj) {
-        LogUtil.d(TAG, "PUSH:" + obj.toString());
+        LogUtils.d("PUSH:" + obj.toString());
         queue.addLast(obj);
         // wakes up any waiting thread
         notify();
@@ -46,7 +46,7 @@ public class RequestQueue {
      */
     public synchronized Object pop()
             throws InterruptedException {
-        LogUtil.d(TAG, "POP:...");
+        LogUtils.d("POP:...");
         while (queue.size() <= 0) {
             try {
                 // not using timeout currently

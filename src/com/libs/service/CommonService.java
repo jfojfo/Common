@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.IBinder;
 
-import com.libs.utils.LogUtil;
+import com.libs.utils.LogUtils;
 
 public class CommonService extends Service {
     private static final String TAG = CommonService.class.getSimpleName();
@@ -45,15 +45,15 @@ public class CommonService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        LogUtil.d(TAG, "service created.");
+        LogUtils.d("service created.");
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        LogUtil.d(TAG, "Received start id " + startId + ": " + intent);
+        LogUtils.d("Received start id " + startId + ": " + intent);
         if (intent != null) {
             String action = intent.getAction();
-            LogUtil.d(TAG, "onStartCommand:" + action);
+            LogUtils.d("onStartCommand:" + action);
             if (ACTION_UPDATE_STATISTICS.equals(action)) {
                 handleUpdateStatistics();
             } else if (ACTION_STOP_SERVICE.equals(action)) {
@@ -72,7 +72,7 @@ public class CommonService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        LogUtil.d(TAG, "service destroyed.");
+        LogUtils.d("service destroyed.");
     }
 
     @Override
