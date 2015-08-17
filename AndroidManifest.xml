@@ -5,12 +5,12 @@
     android:versionName="1.0" >
 
     <application>
-        <activity android:name="com.libs.test.TestActivity" >
-            <intent-filter >
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <!--<activity android:name="com.libs.test.TestActivity" >-->
+            <!--<intent-filter >-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+        <!--</activity>-->
 
         <service android:name="com.libs.service.CommonService" />
 
